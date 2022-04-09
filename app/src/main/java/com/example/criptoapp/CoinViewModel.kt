@@ -3,6 +3,7 @@ package com.example.criptoapp
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import com.example.criptoapp.api.ApiFactory
 import com.example.criptoapp.database.AppDatabase
 import com.example.criptoapp.pojo.CoinPriceInfo
@@ -10,6 +11,7 @@ import com.example.criptoapp.pojo.CoinPriceInfoRawData
 import com.google.gson.Gson
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -18,11 +20,21 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
 
     val priceList = db.coinPriceInfoDao().getPriceList()
 
-    fun loadData() {
+    init {
+        loadData()
+    }
+    fun getDetailInfo(fSym:String):LiveData<CoinPriceInfo>{
+        return db.coinPriceInfoDao().getPriceInfoAboutCoin(fSym)
+    }
+
+    private fun loadData() {
         val disposable = ApiFactory.apiService.getTopCoinsInfo(limit = 50)
             .map { it.data?.map { it.coinInfo?.name }?.joinToString(",") }
             .flatMap { ApiFactory.apiService.getFullPriceList(fsyms = it) }
             .map { getPriceListFromRawData(it) }
+            .delaySubscription(10,TimeUnit.SECONDS)
+            .repeat()
+            .retry()
             .subscribeOn(Schedulers.io())
             .subscribe({
                 if (it != null) {
@@ -38,8 +50,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
         coinPriceInfoRawData: CoinPriceInfoRawData,
     ): List<CoinPriceInfo> {
         val result=ArrayList<CoinPriceInfo>()
-        val jsonObject = coinPriceInfoRawData.coinPriceInfoJsonObject
-        if (jsonObject == null) return result
+        val jsonObject = coinPriceInfoRawData.coinPriceInfoJsonObject ?: return result
         val coinKeySet = jsonObject.keySet()
         for (coinKey in coinKeySet) {
             val currencyJson = jsonObject.getAsJsonObject(coinKey)
