@@ -1,7 +1,9 @@
 package com.example.criptoapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 
@@ -12,5 +14,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.loadData()
+        viewModel.priceList.observe(this, Observer {
+            Log.d("TEST_OF_LOADING_DATA","SUCCESS IN ACTIVITY: $it")
+        })
     }
 }
