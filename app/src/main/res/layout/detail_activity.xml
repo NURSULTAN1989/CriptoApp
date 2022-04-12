@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgView"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_margin="16dp"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imgView"
         app:layout_constraintVertical_bias="0.049" />
 
     <TextView
@@ -87,12 +87,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tvDPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="Цена:"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/txt_price"
@@ -123,18 +123,19 @@
                 app:layout_constraintTop_toBottomOf="@id/txt_price" />
 
             <TextView
+                android:id="@+id/tvDMinPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="Цена:"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="@color/red"
                 app:layout_constraintBottom_toBottomOf="@id/txt_min"
                 app:layout_constraintStart_toEndOf="@id/txt_min"
                 app:layout_constraintTop_toTopOf="@id/txt_min"
-                tools:text="7352.5" />
+                tools:text="7110.0" />
 
             <View
                 android:layout_width="match_parent"
@@ -148,7 +149,6 @@
                 android:id="@+id/txt_max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="20dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
@@ -161,6 +161,7 @@
                 app:layout_constraintTop_toBottomOf="@id/txt_min" />
 
             <TextView
+                android:id="@+id/tvDMaxPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -169,10 +170,11 @@
                 android:text="Цена:"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="@color/green"
                 app:layout_constraintBottom_toBottomOf="@id/txt_max"
                 app:layout_constraintStart_toEndOf="@id/txt_max"
                 app:layout_constraintTop_toTopOf="@id/txt_max"
-                tools:text="7352.5" />
+                tools:text="7820.1" />
 
             <View
                 android:id="@+id/view"
@@ -198,6 +200,7 @@
                 app:layout_constraintTop_toBottomOf="@id/txt_max" />
 
             <TextView
+                android:id="@+id/tvDLastMarket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -208,7 +211,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/txt_last"
                 app:layout_constraintStart_toEndOf="@id/txt_last"
                 app:layout_constraintTop_toTopOf="@id/txt_last"
-                tools:text="7352.5" />
+                tools:text="Bitfinex" />
 
             <View
                 android:layout_width="match_parent"
@@ -234,6 +237,7 @@
                 app:layout_constraintTop_toBottomOf="@id/txt_last" />
 
             <TextView
+                android:id="@+id/tvDUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -244,7 +248,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/txt_update"
                 app:layout_constraintStart_toEndOf="@id/txt_update"
                 app:layout_constraintTop_toTopOf="@id/txt_update"
-                tools:text="7352.5" />
+                tools:text="21:05:16" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

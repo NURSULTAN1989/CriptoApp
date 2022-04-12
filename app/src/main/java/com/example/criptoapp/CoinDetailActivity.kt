@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.criptoapp.databinding.DetailActivityBinding
+import com.squareup.picasso.Picasso
 
 class CoinDetailActivity:AppCompatActivity() {
     lateinit var binding:DetailActivityBinding
@@ -25,6 +26,16 @@ class CoinDetailActivity:AppCompatActivity() {
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         if (fromSymbol != null) {
             viewModel.getDetailInfo(fromSymbol).observe(this, Observer {
+                with(binding){
+                    tvDPrice.text=it.price.toString()
+                    tvDMinPrice.text=it.lowday.toString()
+                    tvDMaxPrice.text=it.highday.toString()
+                    tvDLastMarket.text=it.lastmarket.toString()
+                    tvDUpdate.text=it.getFormattedTime()
+                    tvFromSymbol.text=it.fromsymbol
+                    tvToSymbol.text=it.tosymbol
+                    Picasso.get().load(it.getFullImageUrl()).into(imgView)
+                }
                 Log.d("Detail_Info", it.toString())
             })
         }

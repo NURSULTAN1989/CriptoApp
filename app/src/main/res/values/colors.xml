@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="holo_purple">#B16BBD</color>
     <color name="blue">#1A7AC6</color>
+    <color name="red">#E84815</color>
+    <color name="green">#0EE41A</color>
 </resources>
